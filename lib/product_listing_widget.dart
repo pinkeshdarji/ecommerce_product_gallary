@@ -226,9 +226,10 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
             ),
           ),
           Expanded(
-              child: ProductList(
-            products: isSearchStarted ? searchedProducts : products,
-          )),
+            child: ProductList(
+              products: isSearchStarted ? searchedProducts : products,
+            ),
+          ),
         ],
       ),
     );

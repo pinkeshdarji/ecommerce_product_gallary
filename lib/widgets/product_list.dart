@@ -1,4 +1,5 @@
 import 'package:ecomm_app/product_detail_widget.dart';
+import 'package:ecomm_app/widgets/product_tile_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,7 +7,6 @@ import '../bloc/cart_bloc.dart';
 import '../bloc/state/cart_state.dart';
 import '../models/product.dart';
 import 'product_tile.dart';
-import 'product_tile_animation.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({super.key, required this.products});
