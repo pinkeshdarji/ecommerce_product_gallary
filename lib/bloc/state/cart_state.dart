@@ -1,5 +1,7 @@
+import '../../models/product.dart';
+
 abstract class CartState {
-  final List<int> cartItem;
+  final List<Product> cartItem;
   final bool isGridView;
   const CartState({this.cartItem = const [], this.isGridView = true});
 
@@ -12,7 +14,7 @@ class CartLoadInProgress extends CartState {
 }
 
 class ProductAdded extends CartState {
-  final List<int> cartItem;
+  final List<Product> cartItem;
 
   const ProductAdded({required this.cartItem}) : super(cartItem: cartItem);
 
@@ -24,7 +26,7 @@ class ProductAdded extends CartState {
 }
 
 class ProductRemoved extends CartState {
-  final List<int> cartItem;
+  final List<Product> cartItem;
 
   const ProductRemoved({required this.cartItem}) : super(cartItem: cartItem);
 

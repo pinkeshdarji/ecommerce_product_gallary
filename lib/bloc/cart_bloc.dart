@@ -1,13 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../models/product.dart';
 import 'event/cart_event.dart';
 import 'state/cart_state.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(ProductAdded(cartItem: []));
 
-  final List<int> _cartItems = [];
-  List<int> get items => _cartItems;
+  final List<Product> _cartItems = [];
+  List<Product> get items => _cartItems;
   bool isGridView = true;
 
   @override

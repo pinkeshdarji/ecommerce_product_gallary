@@ -6,6 +6,7 @@ import '../bloc/cart_bloc.dart';
 import '../bloc/state/cart_state.dart';
 import '../models/product.dart';
 import 'product_tile.dart';
+import 'product_tile_animation.dart';
 
 class ProductList extends StatelessWidget {
   const ProductList({super.key, required this.products});
@@ -20,7 +21,7 @@ class ProductList extends StatelessWidget {
         return LayoutBuilder(builder: (context, constraints) {
           return GridView.builder(
             itemCount: products.length,
-            itemBuilder: (context, index) => ProductTile(
+            itemBuilder: (context, index) => ProductTileAnimation(
               itemNo: index,
               product: products[index],
             ),
@@ -34,7 +35,7 @@ class ProductList extends StatelessWidget {
         return ListView.builder(
             itemCount: products.length,
             itemBuilder: (BuildContext context, int index) {
-              return ProductTile(
+              return ProductTileAnimation(
                 itemNo: index,
                 product: products[index],
               );

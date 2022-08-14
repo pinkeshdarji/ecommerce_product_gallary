@@ -159,7 +159,7 @@ class _ProductListingWidgetState extends State<ProductListingWidget> {
                           obscureText: false,
                           onChanged: (_) => EasyDebounce.debounce(
                             'tFMemberController',
-                            Duration(milliseconds: 2000),
+                            Duration(milliseconds: 0),
                             () {
                               isSearchStarted =
                                   textController!.text.isNotEmpty && textController!.text.trim().length > 0;

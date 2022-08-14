@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../models/product.dart';
+
 abstract class CartEvent extends Equatable {
   const CartEvent();
 
@@ -8,7 +10,7 @@ abstract class CartEvent extends Equatable {
 }
 
 class AddProduct extends CartEvent {
-  final int productIndex;
+  final Product productIndex;
 
   const AddProduct(this.productIndex);
 
@@ -20,7 +22,7 @@ class AddProduct extends CartEvent {
 }
 
 class RemoveProduct extends CartEvent {
-  final int productIndex;
+  final Product productIndex;
 
   const RemoveProduct(this.productIndex);
 

@@ -1,6 +1,9 @@
 import 'package:ecomm_app/app_theme.dart';
 import 'package:ecomm_app/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/cart_bloc.dart';
 
 class CheckoutWidget extends StatefulWidget {
   const CheckoutWidget({Key? key}) : super(key: key);
@@ -18,7 +21,9 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    cartItems = [];
+    setState(() {
+      cartItems = BlocProvider.of<CartBloc>(context).items;
+    });
   }
 
   @override
@@ -93,105 +98,95 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    ListView(
-                      padding: EdgeInsets.zero,
-                      primary: false,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: AppTheme.of(context).secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4,
-                                  color: Color(0x320E151B),
-                                  offset: Offset(0, 1),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(16, 8, 8, 8),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Hero(
-                                    tag: 'ControllerImage',
-                                    transitionOnUserGestures: true,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: Image.network(
-                                        'https://media.direct.playstation.com/is/image/sierialto/dualsense-ps5-controller-white-accessory-front',
-                                        width: 80,
-                                        height: 80,
-                                        fit: BoxFit.fitWidth,
+                    ListView.builder(
+                        padding: EdgeInsets.zero,
+                        primary: false,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: cartItems.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(16, 8, 16, 0),
+                            child: Container(
+                              width: double.infinity,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: AppTheme.of(context).secondaryBackground,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 4,
+                                    color: Color(0x320E151B),
+                                    offset: Offset(0, 1),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(16, 8, 8, 8),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Hero(
+                                      tag: 'ControllerImage',
+                                      transitionOnUserGestures: true,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Image.network(
+                                          cartItems[index].image,
+                                          width: 80,
+                                          height: 80,
+                                          fit: BoxFit.fitWidth,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                          child: Text(
-                                            'Controller Basic',
-                                            style: AppTheme.of(context).subtitle2.override(
-                                                  fontFamily: 'Poppins',
-                                                  color: AppTheme.of(context).primaryText,
-                                                ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                            child: Text(
+                                              cartItems[index].name,
+                                              style: AppTheme.of(context).subtitle2.override(
+                                                    fontFamily: 'Poppins',
+                                                    color: AppTheme.of(context).primaryText,
+                                                  ),
+                                            ),
                                           ),
-                                        ),
-                                        Text(
-                                          '\$125.50',
-                                          style: AppTheme.of(context).bodyText2,
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                                          child: Text(
-                                            'Quanity: 1',
+                                          Text(
+                                            '\$${cartItems[index].price}',
                                             style: AppTheme.of(context).bodyText2,
                                           ),
-                                        ),
-                                      ],
+                                          Padding(
+                                            padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                                            child: Text(
+                                              'Quanity: ${cartItems[index].quantity}',
+                                              style: AppTheme.of(context).bodyText2,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.edit_outlined,
-                                      color: AppTheme.of(context).secondaryText,
-                                      size: 20,
+                                    IconButton(
+                                      icon: Icon(
+                                        Icons.delete_outline_rounded,
+                                        color: Color(0xFFE86969),
+                                        size: 20,
+                                      ),
+                                      onPressed: () {
+                                        print('IconButton pressed ...');
+                                      },
                                     ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.delete_outline_rounded,
-                                      color: Color(0xFFE86969),
-                                      size: 20,
-                                    ),
-                                    onPressed: () {
-                                      print('IconButton pressed ...');
-                                    },
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
+                          );
+                        }),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(24, 16, 24, 4),
                       child: Row(

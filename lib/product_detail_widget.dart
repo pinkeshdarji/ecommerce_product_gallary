@@ -57,7 +57,7 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget> with TickerPr
         ),
         actions: [
           BlocBuilder<CartBloc, CartState>(builder: (_, cartState) {
-            List<int> cartItem = cartState.cartItem;
+            List<Product> cartItem = cartState.cartItem;
             return Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 8, 24, 0),
               child: Badge(
@@ -211,9 +211,9 @@ class _ProductDetailWidgetState extends State<ProductDetailWidget> with TickerPr
                     ),
                     MyButtonWidget(
                       onPressed: () {
-                        for (int i = 0; i < countControllerValue!.toInt(); i++) {
-                          BlocProvider.of<CartBloc>(context).add(AddProduct(widget.product.id));
-                        }
+                        Product p = widget.product;
+                        p.quantity = countControllerValue!.toInt();
+                        BlocProvider.of<CartBloc>(context).add(AddProduct(p));
                       },
                       text: 'Add to Cart',
                       options: ButtonOptions(

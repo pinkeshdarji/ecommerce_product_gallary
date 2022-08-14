@@ -7,11 +7,11 @@ import '../bloc/cart_bloc.dart';
 import '../models/product.dart';
 import '../product_detail_widget.dart';
 
-class ProductTile extends StatelessWidget {
+class ProductTileAnimation extends StatelessWidget {
   final int itemNo;
   final Product product;
 
-  const ProductTile({this.itemNo = 0, required this.product});
+  const ProductTileAnimation({this.itemNo = 0, required this.product});
 
   @override
   Widget build(BuildContext context) {
