@@ -44,7 +44,7 @@ class ProductTileAnimation extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [

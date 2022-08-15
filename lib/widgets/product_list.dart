@@ -26,7 +26,7 @@ class ProductList extends StatelessWidget {
               product: products[index],
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+              crossAxisCount: constraints.maxWidth > 700 ? 4 : 2,
               childAspectRatio: 1,
             ),
           );
